@@ -1,0 +1,33 @@
+services:
+  # Servicio 1: Servidor de Minecraft
+  minecraft-server:
+    build: .
+    container_name: minecraft-server
+    # La clave es la indentación de esta línea:
+    volumes:
+      - ./server:/minecraft
+    ports:
+      - "25565:25565"
+    restart: unless-stopped
+    # ... (resto del servicio minecraft-server)
+
+  # Servicio 2: Cliente playit.gg
+  playit:
+    image: ghcr.io/playit-cloud/playit-agent:0.16
+    container_name: playit-agent
+    network_mode: service:minecraft-server
+    environment:
+      - SECRET_KEY=5042d876825052d3c6a86a1c0f99a41e7899b1c9554c8fe0418a123c3dd6c454
+    # La clave es la indentación de esta línea:
+    volumes:
+      - playit_data:/etc/playit
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+# 🚨 ¡ESTA SECCIÓN DEBE ESTAR AL MISMO NIVEL QUE 'services:'!
+volumes:
+  server_data:
+  playit_data:
+
+  
