@@ -28,7 +28,7 @@ https://playit.gg/account/agents
 comando para levantar el servidor en la terminal y con docker desktop descargado y ejecutandose:
 cd C:la/ruta/de_la_carpeta/de_tus_archivos/y_servidor
 
-docker compose up
+docker compose -d up
 
 con esto abras levantado tanto el servicio de docker asi como el servicio de playit.gg donde podran comunicarse con tu servidor de forma publica y remota.
 la terminal puede ser cerrada en cualquier momento sin embargo docker desktop debe permanecer aunque sea en segundo plano.
