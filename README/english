@@ -1,0 +1,25 @@
+These files contain code to run a Minecraft server so that you can set up your own Minecraft server using the original Minecraft server within a Docker container.
+
+To use this repository, you must have Docker Desktop installed and running from the following link: https://www.docker.com/products/docker-desktop
+
+You must create a folder where the two files from this repository will be located, in addition to your server folder.
+
+Dockerfile config: the section “COPY server /minecraft” where “server” will be replaced by the name of the folder where you have the server.
+
+Remember that the file used to start the server, whether it is server.jar by default downloaded from the direct page, or paperMC.your.version.minecraft which comes with spigot and buildkit, must be renamed to “server.jar”; otherwise, you will have to adjust other parameters on your server.
+
+The CMD section is the command that will be executed when starting “CMD [‘java’, ”-Xmx4G“, ”-Xms1G“, ”-jar“, ”server. jar“, ‘nogui’]”, you can change the “-Xmx4G” section to the maximum amount of RAM that will be allocated to the server, and similarly with “-Xms1G” to designate the initial amount of memory for the server.
+
+compose.yml config: this file consists of two services, the Minecraft service and the playit.gg service.
+
+For correct configuration, you must replace the example: environment: - SECRET_KEY=5042d876825052d3c6a86a1c0f99a41e7899b1c9554c8fe0418a123c3dd6c454 with your secret key assigned by the following page: https://playit.gg/account/agents
+
+Command to start the server in the terminal with Docker Desktop downloaded and running: cd C:path/to/folder/of/your/files/and/server
+
+docker compose up -d
+
+This will start both the docker service and the playit.gg service, where you can communicate with your server publicly and remotely. The terminal can be closed at any time, but docker desktop must remain running, even if only in the background.
+
+To log out, you must run: docker compose down
+
+The link to access the server remotely and publicly will be provided by the playit.gg page when you create a tunnel. You can also access the server if you are the host by using the port forwarding previously set up in the Dockerfile document via the address: “localhost”.
